@@ -2,7 +2,7 @@ import Foundation
 
 enum HistoryConfig {
     /// Latest release manifest from your public data repo (see crime-near-me-data/README.md).
-    static let manifestURL = "https://github.com/YOUR_GITHUB_USERNAME/crime-near-me-data/releases/latest/download/manifest.json"
+    static let manifestURL = "https://github.com/stevenwilliams81520-prog/crime-near-me-data/releases/latest/download/manifest.json"
 
     static var isConfigured: Bool { !manifestURL.contains("YOUR_GITHUB_USERNAME") }
 }
