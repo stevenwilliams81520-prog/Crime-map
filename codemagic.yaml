@@ -1,6 +1,6 @@
 workflows:
   ios-release:
-    name: Crime Map iOS
+    name: Murder Map iOS
     instance_type: mac_mini_m2
     max_build_duration: 60
     integrations:
@@ -8,7 +8,9 @@ workflows:
     environment:
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: com.stevenwilliams.crimemap
+        bundle_identifier: com.stevenwilliams.murdermap
+      vars:
+        APP_STORE_APPLE_ID: 6836432396
       node: 20
       xcode: latest
       cocoapods: default
@@ -24,7 +26,7 @@ workflows:
         script: |
           PLIST=ios/App/App/Info.plist
           /usr/libexec/PlistBuddy -c "Delete :NSLocationWhenInUseUsageDescription" "$PLIST" 2>/dev/null || true
-          /usr/libexec/PlistBuddy -c "Add :NSLocationWhenInUseUsageDescription string 'Crime Map uses your location to show recorded crimes near you.'" "$PLIST"
+          /usr/libexec/PlistBuddy -c "Add :NSLocationWhenInUseUsageDescription string 'Murder Map uses your location to show recorded crimes near you.'" "$PLIST"
           /usr/libexec/PlistBuddy -c "Delete :ITSAppUsesNonExemptEncryption" "$PLIST" 2>/dev/null || true
           /usr/libexec/PlistBuddy -c "Add :ITSAppUsesNonExemptEncryption bool false" "$PLIST"
           /usr/libexec/PlistBuddy -c "Set :UIStatusBarStyle UIStatusBarStyleLightContent" "$PLIST" 2>/dev/null || \
@@ -35,8 +37,9 @@ workflows:
         script: xcode-project use-profiles
       - name: Build number
         script: |
+          LATEST=$(app-store-connect get-latest-testflight-build-number "$APP_STORE_APPLE_ID" || echo 0)
           cd ios/App
-          agvtool new-version -all $(($BUILD_NUMBER + 1))
+          agvtool new-version -all $(($LATEST + 1))
       - name: Build IPA
         script: |
           xcode-project build-ipa \
