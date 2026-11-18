@@ -1,4 +1,4 @@
-/* Crime Map — iPhone (Capacitor) version
+/* Crime Near Me — iPhone (Capacitor) version
  * Crime data: data.police.uk · Postcodes: postcodes.io
  */
 (function () {

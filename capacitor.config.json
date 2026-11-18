@@ -1,6 +1,6 @@
 {
   "appId": "com.stevenwilliams.crimemap",
-  "appName": "Crime Map",
+  "appName": "Crime Near Me",
   "webDir": "www",
   "backgroundColor": "#111418",
   "ios": {

@@ -1,5 +1,5 @@
 {
-  "name": "crime-map",
+  "name": "crime-near-me",
   "version": "1.0.0",
   "private": true,
   "description": "Street-level UK crime map (data.police.uk) for iPhone",
